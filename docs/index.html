@@ -274,13 +274,18 @@
 <body>
     <div class="container">
         <header>
-            <h1>📱 InstaBoost</h1>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px;">
+                <img src="instagramlogo.png" alt="Instagram" style="width: 60px; height: 60px; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));">
+                <h1>InstaBoost</h1>
+            </div>
             <p>Seguidores Reais e Brasileiros</p>
         </header>
 
         <div class="service-card">
             <div class="service-header">
-                <div class="service-icon">📸</div>
+                <div class="service-icon">
+                    <img src="instagramlogo.png" alt="Instagram" style="width: 50px; height: 50px;">
+                </div>
                 <div class="service-info">
                     <h2>Instagram Seguidores</h2>
                     <div class="badges">
@@ -362,14 +367,14 @@
         </div>
 
         <footer>
-            <p>© 2025 InstaBoost - Todos os direitos reservados</p>
+            <p>© 2024 InstaBoost - Todos os direitos reservados</p>
             <p style="font-size: 0.85em; margin-top: 5px;">Serviço independente não afiliado ao Instagram</p>
         </footer>
     </div>
 
     <script>
-        // URL do backend Railway - TROCAR AQUI!
-        const BACKEND_URL = 'https://seu-backend.up.railway.app';
+        // URL do backend Railway
+        const BACKEND_URL = 'https://booster-backend-production-17e3.up.railway.app';
 
         // Atualizar total em tempo real
         document.getElementById('quantity').addEventListener('input', function() {
