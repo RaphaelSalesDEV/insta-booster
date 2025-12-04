@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaBoost - Seguidores Instagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #6B46C1 0%, #9333EA 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .service-icon {
+            font-size: 3em;
+        }
+
+        .service-info h2 {
+            color: #6B46C1;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .service-info .badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #f8f9fa;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #555;
+        }
+
+        .price-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .price {
+            font-size: 3em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6B46C1, #9333EA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price-desc {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .info-list {
+            margin: 20px 0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            padding: 10px 0;
+            color: #555;
+        }
+
+        .info-item::before {
+            content: "📌";
+            font-size: 1.2em;
+        }
+
+        .order-section {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .order-section h2 {
+            color: #6B46C1;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #9333EA;
+            box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+        }
+
+        .form-group small {
+            color: #666;
+            font-size: 0.85em;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .quantity-info {
+            background: #fff3cd;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            color: #856404;
+            font-size: 0.9em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6B46C1 0%, #9333EA 100%);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(147, 51, 234, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(147, 51, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .total-display {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+        }
+
+        .total-display .label {
+            color: #666;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .total-display .amount {
+            background: linear-gradient(135deg, #6B46C1, #9333EA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-top: 8px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .price {
+                font-size: 2.5em;
+            }
+            .order-section {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📱 InstaBoost</h1>
+            <p>Seguidores Reais e Brasileiros</p>
+        </header>
+
+        <div class="service-card">
+            <div class="service-header">
+                <div class="service-icon">📸</div>
+                <div class="service-info">
+                    <h2>Instagram Seguidores</h2>
+                    <div class="badges">
+                        <span class="badge">🇧🇷 SR (Brasileiros)</span>
+                        <span class="badge">👥 Usuários Mundiais</span>
+                        <span class="badge">⏱️ Início: 0-1h</span>
+                        <span class="badge">♻️ Sem Recargas</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="price-box">
+                <div class="price">R$ 10,00</div>
+                <div class="price-desc">Por 1.000 seguidores (100K/dia)</div>
+            </div>
+
+            <div class="info-list">
+                <div class="info-item">
+                    <strong>Formato do Link:</strong> Link do Perfil<br>
+                    <small>Exemplo: https://www.instagram.com/@xxx</small>
+                </div>
+                <div class="info-item">
+                    <strong>Qualidade:</strong> Usuários Mundiais de alta qualidade
+                </div>
+                <div class="info-item">
+                    <strong>Tempo Médio:</strong> 0-1h. Se não, em até 6h
+                </div>
+                <div class="info-item">
+                    <strong>⚠️ Importante:</strong> Perfil deve estar público
+                </div>
+                <div class="info-item">
+                    <strong>⚠️ Atenção:</strong> Não faça outro pedido no mesmo link antes deste finalizar
+                </div>
+            </div>
+        </div>
+
+        <div class="order-section">
+            <h2>🛒 Fazer Pedido Agora</h2>
+            
+            <div id="alertBox" class="alert"></div>
+
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="link">🔗 Link do Instagram</label>
+                    <input 
+                        type="url" 
+                        id="link" 
+                        placeholder="https://www.instagram.com/@seuperfil"
+                        required
+                    >
+                    <small>Cole o link do seu perfil do Instagram (deve estar público)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">📊 Quantidade de seguidores</label>
+                    <input 
+                        type="number" 
+                        id="quantity" 
+                        value="500"
+                        min="500"
+                        max="1000000"
+                        step="100"
+                        required
+                    >
+                    <div class="quantity-info">
+                        <strong>Mínimo:</strong> 500 (R$ 5,00) | <strong>Máximo:</strong> 1.000.000 | <strong>Taxa:</strong> 100K por dia
+                    </div>
+                </div>
+
+                <div class="total-display">
+                    <div class="label">Total a pagar via PIX</div>
+                    <div class="amount">R$ <span id="totalAmount">5,00</span></div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    💳 Gerar QR Code PIX
+                </button>
+            </form>
+        </div>
+
+        <footer>
+            <p>© 2024 InstaBoost - Todos os direitos reservados</p>
+            <p style="font-size: 0.85em; margin-top: 5px;">Serviço independente não afiliado ao Instagram</p>
+        </footer>
+    </div>
+
+    <script>
+        // URL do backend Railway - TROCAR AQUI!
+        const BACKEND_URL = 'https://seu-backend.up.railway.app';
+
+        // Atualizar total em tempo real
+        document.getElementById('quantity').addEventListener('input', function() {
+            const quantity = parseInt(this.value) || 0;
+            const pricePerThousand = 10.00;
+            const total = Math.max((quantity / 1000) * pricePerThousand, 5.00);
+            document.getElementById('totalAmount').textContent = total.toFixed(2).replace('.', ',');
+        });
+
+        // Mostrar alerta
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = message;
+            alertBox.className = `alert alert-${type}`;
+            alertBox.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 10000);
+        }
+
+        // Submeter formulário
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const link = document.getElementById('link').value.trim();
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            // Validações
+            if (!link.includes('instagram.com')) {
+                showAlert('❌ Por favor, insira um link válido do Instagram!', 'error');
+                return;
+            }
+
+            if (quantity < 500) {
+                showAlert('❌ A quantidade mínima é 500 seguidores (R$ 5,00)!', 'error');
+                return;
+            }
+
+            if (quantity > 1000000) {
+                showAlert('❌ A quantidade máxima é 1.000.000!', 'error');
+                return;
+            }
+
+            const total = Math.max((quantity / 1000) * 10, 5.00);
+
+            const orderData = {
+                link: link,
+                quantity: quantity,
+                total: total.toFixed(2)
+            };
+
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = '⏳ Gerando QR Code PIX...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/create_charge.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    window.location.href = `${BACKEND_URL}/pagamento.php?order=${result.order_hash}`;
+                } else {
+                    showAlert(`❌ ${result.message}`, 'error');
+                    btn.textContent = '💳 Gerar QR Code PIX';
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showAlert(`❌ Erro ao processar pedido. Tente novamente.`, 'error');
+                btn.textContent = '💳 Gerar QR Code PIX';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
